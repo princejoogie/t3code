@@ -60,7 +60,7 @@ const usageByWindowAtom = Atom.family((windowKey: string) =>
       if (!access.canReadDiagnostics) {
         statuses.push({
           environmentId,
-          label: presentation.entry.target.label,
+          label: presentation.entry.nickname ?? presentation.entry.target.label,
           ...access,
           summary: null,
           needsCursorKeychainAccess: false,
@@ -71,7 +71,7 @@ const usageByWindowAtom = Atom.family((windowKey: string) =>
       const summary = Option.getOrNull(AsyncResult.value(result));
       statuses.push({
         environmentId,
-        label: presentation.entry.target.label,
+        label: presentation.entry.nickname ?? presentation.entry.target.label,
         isPending: result.waiting,
         canReadDiagnostics: true,
         error: result._tag === "Failure" ? "This environment could not report usage." : null,
